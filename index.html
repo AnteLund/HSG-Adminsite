@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Google MDL : Buttons with Fab with color</title>
+    <!-- Material Design Lite -->
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+   <link rel="stylesheet"
+    href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.red-purple.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="theme.css">
+
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-app="hsgAdminApp" ng-controller="StudentController">
+    <div class="student-table">
+      <div class="search-field">
+        <i class="material-icons">search</i>
+        <input class="search-input" ng-model="query">
+      </div>
+      <table class="table table-border">
+      <thead class="thead-inverse">
+        <th><i class="material-icons">explore</i></th>
+          <th>  <a href="#" ng-click="orderByField='firstName'; reverseSort = !reverseSort">Name<span ng-show="orderByField=='firstName'"><span ng-show="!reverseSort"><i class="material-icons">arrow_drop_up</i></span><span ng-show="reverseSort"><i class="material-icons">arrow_drop_down</i></span></span><span ng-show="orderByField!='firstName'"><i class="material-icons">keyboard_arrow_right</i></span></a></th>
+          <th> Email <a href="#" ng-click="orderByField='email'; reverseSort = !reverseSort"><span ng-show="!reverseSort"><i class="material-icons">arrow_drop_up</i></span><span ng-show="reverseSort"><i class="material-icons">arrow_drop_down</i></span></a></th>
+          <th> Exam</th>
+          <th> Year of graduation </th>
+          <th> City of interest</th>
+          <th> Area of interest</th>
+          <th> Added date</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="student in students.allStudent | orderBy:orderByField:reverseSort| filter:query">
+        <tr class="student-row" ng-click="showComments = ! showComments">
+          <td>
+            <i ng-show="showComments" class="material-icons">expand_more</i>
+            <i ng-show="!showComments" class="material-icons">expand_less</i>
+          </td>
+          <td>{{student.firstName}} {{student.lastName}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.exam}}</td>
+          <td>{{student.yearOfGraduation}}</td>
+          <td><div class='city-names' ng-repeat="city in student.cityOfInterest">{{city.cityName}} </div>
+          </td>
+          <td><div class='city-names' ng-repeat ="role in student.roleOfInterest">{{role.roleName}}</div></td>
+          <td class='city-names'>{{student.creationDate}}</td>
+        </tr>
+        <tr class="comment-row" ng-show="showComments" ng-repeat="comment in student.comments">
+          <td></td>
+          <td colspan="4">
+            <div class="card comment-card">
+               <div class="card-block">
+                 <button type="submit" class="btn btn-secondary" ng-click="deleteComment(student._id, comment._id)"><i class="material-icons">clear</i></button>
+                 <p class="card-text">{{comment.commentText}} </p>
+
+               </div>
+               <div class="card-footer text-muted text-xs-right comment-footer">
+     {{comment.creationDate}} - <i>{{comment.authur}}</i>
+  </div>
+
+             </div>
+           </div></td>
+           <td></td>
+        </tr>
+        <tr class="comment-input comment-row" ng-show="showComments" id="commentInsertField{{student.id}}">
+          <td colspan="7">
+            <form class="comment-form">
+              <fieldset class="form-group">
+                <textarea class="form-control" ng-model="student.commentTextArea" rows="3"></textarea>
+                  <button type="submit" class="btn btn-secondary" ng-click="addComment(student._id, student.commentTextArea)">Add comment</button>
+  </fieldset>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+  </body>
+</html>

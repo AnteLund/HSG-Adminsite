@@ -1,0 +1,56 @@
+.student-table {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 10px;
+}
+.search-field {
+  float: right;
+
+}
+.city-names{
+  font-size: 70%;
+}
+
+.comment-form{
+  width: 50%;
+  margin-left: 25%;
+}
+.comment-footer{
+    font-size: 10px;
+    padding: 5px;
+}
+.comment-card button {
+    position: absolute;
+    right: 5;
+    top: 5px;
+    padding: 5px;
+}
+
+.comment-card button {
+    display:none;
+}
+
+.comment-card:hover button {
+    display:inline-block;
+}
+.search-icon {
+  font-size: 40px;
+}
+.search-input {
+  background-color: #373A3C;
+  border-style: hidden;
+  color: white;
+  height: 40px;
+  width: 300px;
+}
+.comment-row {
+  border-top-style: hidden;
+}
+
+.student-row:hover {
+  background-color: gray;
+}
+
+.student-row {
+  cursor:pointer;
+}
